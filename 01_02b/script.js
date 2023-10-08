@@ -6,15 +6,9 @@
 
 import data from "./data.js";
 
-const mainContent = document.querySelector(".main-content");
-
-const Card = (data) => {
-  const imgData = data[0];
-  const date = new Date(imgData.created_at);
-
-  const markup = `
-    <figure class="image">
-      <img
+const buildImage = (imgData) => {
+  const srcset=
+  const img =`<img
         srcset="
           ${imgData.urls.full} ${imgData.width}w,
           ${imgData.urls.regular} 1080w,
@@ -26,7 +20,19 @@ const Card = (data) => {
         height="${imgData.height}"
         alt="${imgData.description}"
         loading="lazy"
-      />
+      />`;
+      return img;
+};
+
+const mainContent = document.querySelector(".main-content");
+
+const Card = (data) => {
+  const imgData = data[0];
+  const date = new Date(imgData.created_at);
+
+  const markup = `
+    <figure class="image">
+      ${buildImage(imgData)}
       <figcaption class="image__caption">
         <h3 class="image__title">${imgData.description}</h3>
         <div class="image__meta">
